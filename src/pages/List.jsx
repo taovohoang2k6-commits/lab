@@ -42,8 +42,11 @@ function ListPage() {
             <tr>
               <th className="px-4 py-2 border border-gray-300 text-left">ID</th>
               <th className="px-4 py-2 border border-gray-300 text-left">Name</th>
-              <th className="px-4 py-2 border border-gray-300 text-left">Last</th>
-              <th className="px-4 py-2 border border-gray-300 text-left">Handle</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Destination</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Duration</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Price</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Image</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Description</th>
               <th className="px-4 py-2 border border-gray-300 text-left">Action</th>
             </tr>
           </thead>
@@ -53,8 +56,13 @@ function ListPage() {
               <tr key={tour.id} className="hover:bg-gray-50">
                 <td className="px-4 py-2 border border-gray-300">{tour.id}</td>
                 <td className="px-4 py-2 border border-gray-300">{tour.name}</td>
-                <td className="px-4 py-2 border border-gray-300">{tour.image}</td>
-                <td className="px-4 py-2 border border-gray-300">@mdo</td>
+                <td className="px-4 py-2 border border-gray-300">{tour.destination}</td>
+                <td className="px-4 py-2 border border-gray-300">{tour.duration}</td>
+                <td className="px-4 py-2 border border-gray-300">{tour.price}</td>
+                <td className="px-4 py-2 border border-gray-300">
+                  <img width={100} src={tour.image} alt="" />
+                </td>
+                <td className="px-4 py-2 border border-gray-300">{tour.description}</td>
 
                 <td className="px-4 py-2 border border-gray-300">
                   <button

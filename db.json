@@ -9,6 +9,15 @@
       "image": "https://picsum.photos/400/300?random=2",
       "description": "Du thuyền vịnh Hạ Long - Kỳ quan thiên nhiên thế giới",
       "available": 20
+    },
+    {
+      "name": "a",
+      "price": 1000,
+      "destination": "a",
+      "duration": "a",
+      "description": "a",
+      "image": "https://picsum.photos/400/300?random=2",
+      "id": 3
     }
   ]
 }

@@ -1,6 +1,7 @@
 import { Toaster } from 'react-hot-toast'
 import { Routes, Route , Link} from 'react-router-dom'
 import ListPage from './pages/List'
+import AddPage from './pages/Add'
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Link to="/list" className="hover:text-gray-200">
               Danh sách
             </Link>
-            <a href="#" className="hover:text-gray-200">
+            <a href="/add" className="hover:text-gray-200">
               Thêm mới
             </a>
           </div>
@@ -41,7 +42,9 @@ function App() {
 
         <Routes>
           <Route path="/list" element={<ListPage />} />
+           <Route path="/add" element={<AddPage />} />
         </Routes>
+
       </div>
 
       <Toaster />
