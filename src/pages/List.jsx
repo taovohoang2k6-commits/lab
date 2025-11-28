@@ -1,0 +1,84 @@
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+import axios from 'axios'
+
+function ListPage() {
+  const [tours, setTours] = useState([])
+
+  useEffect(() => {
+    const getTours = async () => {
+      try {
+        const { data } = await axios.get('http://localhost:3000/tours')
+        setTours(data)
+      } catch (error) {
+        toast.error("Lỗi tải dữ liệu!")
+      }
+    }
+    getTours()
+  }, [])
+
+  const handleDelete = async (id, name) => {
+    const confirmDelete = confirm(`Bạn có chắc muốn xóa tour: ${name}?`)
+    if (!confirmDelete) return
+
+    try {
+      await axios.delete(`http://localhost:3000/tours/${id}`)
+
+      // Xóa trong state
+      setTours(prev => prev.filter(t => t.id !== id))
+
+      toast.success(`Đã xóa tour: ${name}`)
+    } catch (error) {
+      toast.error("Xóa thất bại!")
+    }
+  }
+
+  return (
+    <div className="p-6">
+      <h1 className="text-2xl font-semibold mb-6">Danh sách</h1>
+      <div className="overflow-x-auto">
+        <table className="w-full border border-gray-300 rounded-lg">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-4 py-2 border border-gray-300 text-left">ID</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Name</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Last</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Handle</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {tours.map(tour => (
+              <tr key={tour.id} className="hover:bg-gray-50">
+                <td className="px-4 py-2 border border-gray-300">{tour.id}</td>
+                <td className="px-4 py-2 border border-gray-300">{tour.name}</td>
+                <td className="px-4 py-2 border border-gray-300">{tour.image}</td>
+                <td className="px-4 py-2 border border-gray-300">@mdo</td>
+
+                <td className="px-4 py-2 border border-gray-300">
+                  <button
+                    onClick={() => handleDelete(tour.id, tour.name, tour.image)}
+                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    Xóa
+                  </button>
+                </td>
+              </tr>
+            ))}
+
+            {tours.length === 0 && (
+              <tr>
+                <td colSpan={5} className="text-center py-4 text-gray-500 italic">
+                  Không có dữ liệu
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+export default ListPage
