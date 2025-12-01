@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-
+import { Link } from 'react-router-dom'
 function ListPage() {
   const [tours, setTours] = useState([])
 
   useEffect(() => {
     const getTours = async () => {
       try {
-        const { data } = await axios.get('http://localhost:3000/tours')
+        const { data } = await axios.get(`http://localhost:3000/tours`)
         setTours(data)
       } catch (error) {
         toast.error("Lỗi tải dữ liệu!")
@@ -65,12 +65,20 @@ function ListPage() {
                 <td className="px-4 py-2 border border-gray-300">{tour.description}</td>
 
                 <td className="px-4 py-2 border border-gray-300">
-                  <button
-                    onClick={() => handleDelete(tour.id, tour.name, tour.image)}
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                  >
-                    Xóa
-                  </button>
+<div className="flex gap-2">
+  <button
+    onClick={() => handleDelete(tour.id, tour.name, tour.image)}
+    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+  >
+    Xóa
+  </button>
+
+  <Link to={`/edit/${tour.id}`}>
+    <button className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+      Sửa
+    </button>
+  </Link>
+</div>
                 </td>
               </tr>
             ))}
