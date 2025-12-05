@@ -12,10 +12,32 @@ function AddPage() {
   const [image, setImage] = useState('')
     const navigate = useNavigate() 
   // const [category, setCategory] = useState('')
+const validateData = () => {
+  let message = "";
+  if (!name || !price || !destination || !duration || !description || !image) {
+    message = "Vui lòng nhập đầy đủ thông tin!"
+  }
+  if (price && isNaN(Number(price)) || Number(price) < 0) {
+    message = "Giá phải là số dương!"
+  }
+  if(name && (name.length < 3 || name.length > 100 )){
+    message = "Tên phải từ 3 đến 100  ký tự!"
+  }
+    if (duration && isNaN(Number(duration)) || Number(duration) < 0) {
+    message = "Thời gian lớn hơn 0!"
+  }
+  return message;
+};
+
 
   // handleChange
   const handleSubmit = async event =>{
     event.preventDefault()
+    const message = validateData();
+if (message){
+  toast.error(message);
+  return;
+}
     try{
       await axios.post(`http://localhost:3000/tours` ,{
         name,

@@ -17,19 +17,15 @@ function ListPage() {
     getTours()
   }, [])
 
-  const handleDelete = async (id, name) => {
-    const confirmDelete = confirm(`Bạn có chắc muốn xóa tour: ${name}?`)
-    if (!confirmDelete) return
-
-    try {
-      await axios.delete(`http://localhost:3000/tours/${id}`)
-
-      // Xóa trong state
-      setTours(prev => prev.filter(t => t.id !== id))
-
-      toast.success(`Đã xóa tour: ${name}`)
-    } catch (error) {
-      toast.error("Xóa thất bại!")
+  const handleDelete = async id => {
+    if (confirm('Delete')) {
+      try {
+        await axios.delete('http://localhost:3000/tours/' + id)
+        setTours(tours.filter(tour => tour.id !== id))
+      } catch (error) {
+        toast.error(error.message)
+        console.log(error)
+      }
     }
   }
 
@@ -48,6 +44,7 @@ function ListPage() {
               <th className="px-4 py-2 border border-gray-300 text-left">Image</th>
               <th className="px-4 py-2 border border-gray-300 text-left">Description</th>
               <th className="px-4 py-2 border border-gray-300 text-left">Action</th>
+              <th className="px-4 py-2 border border-gray-300 text-left">active</th>
             </tr>
           </thead>
 
@@ -66,12 +63,11 @@ function ListPage() {
 
                 <td className="px-4 py-2 border border-gray-300">
 <div className="flex gap-2">
-  <button
-    onClick={() => handleDelete(tour.id, tour.name, tour.image)}
-    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-  >
-    Xóa
-  </button>
+<button 
+className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+onClick={() => handleDelete(tour.id)}>
+                      Xóa
+                    </button>
 
   <Link to={`/edit/${tour.id}`}>
     <button className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">
@@ -79,6 +75,16 @@ function ListPage() {
     </button>
   </Link>
 </div>
+
+                </td>
+                                  <td>
+                  <label class="inline-flex items-center cursor-pointer">
+                    <input type="checkbox" class="sr-only peer" id="switch1" />
+                    <div class="w-11 h-6 bg-gray-300 peer-checked:bg-blue-600 rounded-full peer-focus:ring-2 peer-focus:ring-blue-300 transition-colors duration-200"></div>
+                    <span class="ml-3 text-sm font-medium text-gray-700">
+                      Bật / Tắt
+                    </span>
+                  </label>
                 </td>
               </tr>
             ))}

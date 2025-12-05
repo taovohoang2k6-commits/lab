@@ -1,31 +1,21 @@
 {
   "tours": [
     {
-      "name": "Hạ Long - Cát Bà 2N1D",
-      "price": 1800000,
-      "destination": "Hạ Long",
-      "duration": "2 ngày 1 đêm",
-      "description": "Du thuyền vịnh Hạ Long - Kỳ quan thiên nhiên thế giới",
-      "image": "https://picsum.photos/400/300?random=2",
-      "id": 2
-    },
-    {
       "name": "c",
       "price": 1000,
       "destination": "b",
       "duration": "d",
       "description": "f",
       "image": "https://picsum.photos/400/300?random=2",
-      "id": 3
-    },
+      "id": 3,
+      "active": true
+    }
+  ],
+  "users": [
     {
-      "name": "caaaaaa",
-      "price": 10000000,
-      "destination": "b",
-      "duration": "d",
-      "description": "f",
-      "image": "https://picsum.photos/400/300?random=2",
-      "id": 4
+      "email": "a@gmail.com",
+      "password": "$2a$10$lNiTnFH5mJAW9nkdAJhpJOCGRBA/L7BdJ1QHpAIe5I7FNAMwTaM6.",
+      "id": 1
     }
   ]
 }
